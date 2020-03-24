@@ -35,4 +35,41 @@ class LoginActivityTest {
         onView(withText(R.string.empty_username_error))
             .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun givenPasswordIsEmpty_whenLogin_shouldShowEmptyPasswordError(){
+        onView(withId(R.id.username))
+            .perform(typeText("Guilherme"))
+        onView(withId(R.id.login))
+            .perform(click())
+
+        onView(withText(R.string.empty_password_error))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun giverPasswordIsInvalid_whenLogin_shouldShowInvalidPasswordErro(){
+        onView(withId(R.id.username))
+            .perform(typeText("Guilherme"))
+        onView(withId(R.id.password))
+            .perform(typeText("Concrete123"))
+        onView(withId(R.id.login))
+            .perform(click())
+
+        onView(withText(R.string.invalid_password_error))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun givenPasswordIsValid_whenLogin_shouldRedirectToHomeActivity(){
+        onView(withId(R.id.username))
+            .perform(typeText("Guilherme"))
+        onView(withId(R.id.password))
+            .perform(typeText("Concrete@123"))
+        onView(withId(R.id.login))
+            .perform(click())
+
+        onView(withText(R.string.area_logada))
+            .check(matches(isDisplayed()))
+    }
 }
