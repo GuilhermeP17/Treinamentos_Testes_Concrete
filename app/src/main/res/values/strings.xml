@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Treinamento Testes</string>
+    <string name="password">Senha</string>
+    <string name="username">Usuário</string>
+    <string name="login">Login</string>
 </resources>

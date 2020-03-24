@@ -1,5 +1,6 @@
 package com.example.treinamentotestes
 
+import com.example.treinamentotestes.utils.PasswordValidator
 import junit.framework.Assert.assertFalse
 import org.junit.Test
 
