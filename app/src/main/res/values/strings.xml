@@ -2,5 +2,10 @@
     <string name="app_name">Treinamento Testes</string>
     <string name="password">Senha</string>
     <string name="username">Usuário</string>
+
     <string name="login">Login</string>
+    <string name="empty_username_error">Usuário não pode estar vazio</string>
+    <string name="empty_password_error">Senha não pode estar vazia</string>
+    <string name="invalid_password_error">Senha Inválida</string>
+    <string name="area_logada">Área Logada</string>
 </resources>
