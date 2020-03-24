@@ -1,4 +1,4 @@
-package com.example.treinamentotestes
+package com.example.treinamentotestes.utils
 
 class PasswordValidator {
     private lateinit var password: String
