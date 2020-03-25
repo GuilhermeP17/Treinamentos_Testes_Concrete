@@ -1,12 +1,7 @@
 package com.example.treinamentotestes
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,61 +10,67 @@ import org.junit.runner.RunWith
 class LoginActivityTest {
 
     @get:Rule
-    val activityRule = ActivityTestRule(LoginActivity::class.java)
+    val activityRule = IntentsTestRule(LoginActivity::class.java)
 
     @Test
     fun givenInitialState_ShouldHaveEmptyUsernameAndPassword() {
-        onView(withId(R.id.username))
-            .check(matches(withText("")))
-        onView(withId(R.id.password))
-            .check(matches(withText("")))
+        loginAssert {
+            checkUsernameIsEmpty()
+            checkPasswordIsEmpty()
+        }
     }
 
     @Test
     fun givenUsernameIsEmpty_whenLogin_shouldShowEmptyUsernameError() {
-        onView(withId(R.id.password))
-            .perform(typeText("abCD@3223233"))
-        onView(withId(R.id.login))
-            .perform(click())
+        loginAct {
+            typePassword("abCD@3223233")
+            clickLogin()
+        }
 
-        onView(withText(R.string.empty_username_error))
-            .check(matches(isDisplayed()))
+        loginAssert {
+            checkMessageWasShown(R.string.empty_username_error)
+        }
     }
 
     @Test
-    fun givenPasswordIsEmpty_whenLogin_shouldShowEmptyPasswordError(){
-        onView(withId(R.id.username))
-            .perform(typeText("Guilherme"))
-        onView(withId(R.id.login))
-            .perform(click())
+    fun givenPasswordIsEmpty_whenLogin_shouldShowEmptyPasswordError() {
+        loginAct {
+            typeUsername("Guilherme")
+            clickLogin()
+        }
 
-        onView(withText(R.string.empty_password_error))
-            .check(matches(isDisplayed()))
+        loginAssert {
+            checkMessageWasShown(R.string.empty_password_error)
+        }
     }
 
     @Test
-    fun giverPasswordIsInvalid_whenLogin_shouldShowInvalidPasswordErro(){
-        onView(withId(R.id.username))
-            .perform(typeText("Guilherme"))
-        onView(withId(R.id.password))
-            .perform(typeText("Concrete123"))
-        onView(withId(R.id.login))
-            .perform(click())
+    fun giverPasswordIsInvalid_whenLogin_shouldShowInvalidPasswordError() {
+        loginAct{
+            typeUsername("Guilherme")
+            typePassword("Concrete123")
+            clickLogin()
+        }
 
-        onView(withText(R.string.invalid_password_error))
-            .check(matches(isDisplayed()))
+        loginAssert{
+            checkMessageWasShown(R.string.invalid_password_error)
+        }
     }
 
     @Test
-    fun givenPasswordIsValid_whenLogin_shouldRedirectToHomeActivity(){
-        onView(withId(R.id.username))
-            .perform(typeText("Guilherme"))
-        onView(withId(R.id.password))
-            .perform(typeText("Concrete@123"))
-        onView(withId(R.id.login))
-            .perform(click())
+    fun givenPasswordIsValid_whenLogin_shouldRedirectToHomeActivity() {
+        loginArrange{
+            mockHomeActivityIntent()
+        }
 
-        onView(withText(R.string.area_logada))
-            .check(matches(isDisplayed()))
+        loginAct {
+            typeUsername("Guilherme")
+            typePassword("Concrete@123")
+            clickLogin()
+        }
+
+        loginAssert{
+            checkHomeActivityWasCalled()
+        }
     }
 }
