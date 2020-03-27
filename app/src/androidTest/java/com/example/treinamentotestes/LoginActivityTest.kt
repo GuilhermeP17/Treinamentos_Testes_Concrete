@@ -20,7 +20,7 @@ class LoginActivityTest {
         }
     }
 
-    /*@Test
+    @Test
     fun givenUsernameIsEmpty_whenLogin_shouldShowEmptyUsernameError() {
         loginAct {
             typePassword("abCD@3223233")
@@ -28,9 +28,9 @@ class LoginActivityTest {
         }
 
         loginAssert {
-            checkMessageWasShown(R.string.empty_username_error)
+            checkMessageWasShown(R.string.generic_login_error)
         }
-    }*/
+    }
 
     @Test
     fun givenPasswordIsEmpty_whenLogin_shouldShowEmptyPasswordError() {

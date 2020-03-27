@@ -8,12 +8,13 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.example.treinamentotestes.utils.PasswordValidator
+import com.example.treinamentotestes.utils.UsernameValidator
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(PasswordValidator())
+        LoginViewModelFactory(UsernameValidator(), PasswordValidator())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

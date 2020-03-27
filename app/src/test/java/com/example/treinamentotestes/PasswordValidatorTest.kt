@@ -7,6 +7,12 @@ import org.junit.Test
 class PasswordValidatorTest{
 
     @Test
+    fun givenPassworIsEmpty_whenValidate_shouldReturnFalse(){
+        val result = PasswordValidator().isValid("")
+        assertFalse(result)
+    }
+
+    @Test
     fun givenPasswordIsShorterThan8_whenValidate_shouldReturnFalse(){
         val result = PasswordValidator().isValid("concret")
         assertFalse(result)
