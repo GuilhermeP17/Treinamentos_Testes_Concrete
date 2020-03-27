@@ -6,6 +6,9 @@ class PasswordValidator {
     fun isValid(password: String) : Boolean{
         this.password = password
 
+        if (password.isEmpty())
+            return false
+
         if (!passwordLenght())
             return false
 

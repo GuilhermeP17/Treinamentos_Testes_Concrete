@@ -8,4 +8,6 @@
     <string name="empty_password_error">Senha não pode estar vazia</string>
     <string name="invalid_password_error">Senha Inválida</string>
     <string name="area_logada">Área Logada</string>
+
+    <string name="generic_login_error">Usuário ou senha inválidos</string>
 </resources>
